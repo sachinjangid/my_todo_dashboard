@@ -13,8 +13,9 @@ body {
     float: left;
     border: solid;
     width: 30%;
-    padding: 10px;
+    padding: 1px;
     margin: 15px;
+    text-align: center;
      /* Should be removed. Only for demonstration */
 }
 
