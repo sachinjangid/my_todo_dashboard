@@ -17,7 +17,17 @@ class InProgress extends Component {
   }
 
   render() {
-    return <div>{this.state.map(item => <div><b>{item.title}</b><div>{item.description}</div><button>click</button></div>)}</div>
+    return (
+      <div>
+        {this.state.map(item => (
+          <div>
+            <b>{item.title}</b>
+            <div>{item.description}</div>
+            <button>click</button>
+          </div>
+        ))}
+      </div>
+    )
   }
 }
 
