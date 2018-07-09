@@ -8,6 +8,7 @@ class Todo extends Component {
       items: [],
     }
     this.addTask = this.addTask.bind(this)
+    this.handleSubmit = this.handleSubmit.bind(this)
   }
 
   listItems(items) {
@@ -32,14 +33,19 @@ class Todo extends Component {
     })
   }
 
+  handleSubmit(event) {
+    console.log('form submitted')
+   
+  }
+
   render() {
     return (
       <div>
-        <div className="Input-Box">
+        <form onSubmit={this.handleSubmit}>
           <input name="title" />
           <textarea name="description" />
           <button onClick={this.addTask}>add</button>
-        </div>
+        </form>
         <div>{this.listItems(this.state.items)}</div>
       </div>
     )
