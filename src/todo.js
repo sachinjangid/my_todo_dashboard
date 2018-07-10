@@ -5,10 +5,13 @@ class Todo extends Component {
   constructor() {
     super()
     this.state = {
+      title: '',
+      description: '',
       items: [],
     }
     this.addTask = this.addTask.bind(this)
-    this.handleSubmit = this.handleSubmit.bind(this)
+    this.handleTitleChange = this.handleTitleChange.bind(this)
+    this.handleDescriptionChange = this.handleDescriptionChange.bind(this)
   }
 
   listItems(items) {
@@ -23,27 +26,35 @@ class Todo extends Component {
   }
 
   addTask() {
+
     this.setState({
+      title: this.state.title,
+      description: this.state.description,
       items: this.state.items.concat([
         {
           id: Math.floor(Math.random() * 100000),
-          details: { title: 'first title', description: 'first description' },
+          details: { title: this.state.title, description: this.state.description },
         },
       ]),
     })
+
   }
 
-  handleSubmit(event) {
-    console.log('form submitted')
-   
+  handleTitleChange(event) {
+    this.setState({title: event.target.value})
   }
+
+  handleDescriptionChange(event) {
+    this.setState({description: event.target.value})
+  }
+
 
   render() {
     return (
       <div>
-        <form onSubmit={this.handleSubmit}>
-          <input name="title" />
-          <textarea name="description" />
+        <form>
+          <input name="title" onChange={this.handleTitleChange} />
+          <textarea name="description" onChange={this.handleDescriptionChange} />
           <button onClick={this.addTask}>add</button>
         </form>
         <div>{this.listItems(this.state.items)}</div>
