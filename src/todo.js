@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom'
 
 const List = props => (
   <div>
-    {props.map((item) => (
+    {props.items.map(item => (
       <div key={item.id}>
         <h4>{item.details.title}</h4>
         <p>{item.details.description}</p>
@@ -14,7 +14,7 @@ const List = props => (
 
 class Todo extends Component {
   constructor() {
-    super();
+    super()
     this.state = {
       title: '',
       description: '',
@@ -25,7 +25,8 @@ class Todo extends Component {
     this.handleDescriptionChange = this.handleDescriptionChange.bind(this)
   }
 
-  handleSubmit() {
+  handleSubmit(event) {
+    event.preventDefault()
     this.setState({
       items: [
         ...this.state.items,
@@ -38,6 +39,7 @@ class Todo extends Component {
         },
       ],
     })
+    this.setState({title: '', description: ''})
   }
 
   handleTitleChange(event) {
@@ -52,14 +54,14 @@ class Todo extends Component {
     return (
       <div>
         <form onSubmit={this.handleSubmit}>
-          <input name="title" onChange={this.handleTitleChange} />
-          <textarea
+          <input value={this.state.title} name="title" onChange={this.handleTitleChange} />
+          <textarea value={this.state.description}
             name="description"
             onChange={this.handleDescriptionChange}
           />
           <button>add</button>
         </form>
-        <div>{List(this.state.items)}</div>
+        <List items={this.state.items} />
       </div>
     )
   }
